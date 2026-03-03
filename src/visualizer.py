@@ -33,7 +33,7 @@ class DataVisualizer:
         ax.set_title("Корреляционная матрица (включая кодированные категории)", fontsize=15)
         return fig
 
-    def plot_disrobutions(self, df: pd.DataFrame, max_cols: int = 9) -> List[plt.Figure]:
+    def plot_distributions(self, df: pd.DataFrame, max_cols: int = 9) -> List[plt.Figure]:
         """
         Строит гистограммы для числовых признаков.
         Возвращает список фигур, так как графиков может быть много.

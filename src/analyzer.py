@@ -5,7 +5,10 @@ from typing import Tuple
 
 class DataAnalyzer:
     """
-
+    Класс отвечает за вычислительную часть EDA:
+    - Статистика
+    - Поиск пропусков
+    - Кодирование категорий для корреляции
     """
     def __init__(self, df: pd.DataFrame):
         self.df = df
@@ -13,10 +16,9 @@ class DataAnalyzer:
 
     def get_overview(self) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """
-
-        :return:
+        Возвращает общую статистику и информацию о типах.
         """
-        stats = self.df.describe(include="all").transponse()
+        stats = self.df.describe(include="all").transpose()
 
         info_df = pd.DataFrame({
             "Тип данных": self.df.dtypes,
@@ -29,13 +31,13 @@ class DataAnalyzer:
 
     def preprocess_for_correlation(self) -> pd.DataFrame:
         """
-
-        :return:
+        Подготавливает данные для корреляционной матрицы.
+        Кодирует категориальные признаки с помощью LabelEncoder.
         """
         df_encoded = self.df.copy()
 
         for col in df_encoded.select_dtypes(include=["object", "category"]).columns:
-            df_encoded[col] = df_encoded.fillna["MISSING"]
+            df_encoded[col] = df_encoded[col].fillna("MISSING")
             le = LabelEncoder()
             df_encoded[col] = le.fit_transform(df_encoded[col].astype(str))
 
@@ -48,8 +50,7 @@ class DataAnalyzer:
 
     def get_correlation_matrix(self) -> pd.DataFrame:
         """
-
-        :return:
+        Считает корреляцию Пирсона.
         """
         if self.numeric_df is None:
             self.preprocess_for_correlation()
