@@ -20,12 +20,15 @@ class DataAnalyzer:
         """
         stats = self.df.describe(include="all").transpose()
 
+        # Отчёт по типам и пропускам
         info_df = pd.DataFrame({
             "Тип данных": self.df.dtypes,
             "Пропуски": self.df.isnull().sum(),
             "% пропусков": self.df.isnull().sum() / self.df.shape[0] * 100,
             "Уникальные": self.df.nunique()
-        })
+        }).reset_index().rename(columns={"index": "Название столбца"})
+
+        stats = stats.reset_index().rename(columns={"index": "Название столбца"})
 
         return stats, info_df
 
@@ -41,6 +44,7 @@ class DataAnalyzer:
             le = LabelEncoder()
             df_encoded[col] = le.fit_transform(df_encoded[col].astype(str))
 
+        # Проверка колонок с числовыми признаками (заполняем медианой для корреляции)
         for col in df_encoded.select_dtypes(include=[np.number]).columns:
             df_encoded[col] = df_encoded[col].fillna(df_encoded[col].median())
 

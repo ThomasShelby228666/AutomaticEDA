@@ -18,7 +18,7 @@ class DataVisualizer:
         Строит тепловую карту пропусков.
         """
         fig, ax = plt.subplots(figsize=(12, 6))
-        sns.heatmap(df.isnull(), cbar=False, yticklabels=False, cmap="viridis", ax=ax)
+        sns.heatmap(df.isnull(), cbar=False, cmap="viridis", ax=ax)
         ax.set_title("Карта пропущенных значений", fontsize=15)
         return fig
 
@@ -27,8 +27,7 @@ class DataVisualizer:
         Строит корреляционную матрицу.
         """
         fig, ax = plt.subplots(figsize=(12, 10))
-        mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
-        sns.heatmap(corr_matrix, mask=mask, annot=True, fmt=".2f", cmap="coolwarm",
+        sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap="coolwarm",
                     linewidths=.5, ax=ax, center=0)
         ax.set_title("Корреляционная матрица (включая кодированные категории)", fontsize=15)
         return fig
@@ -41,6 +40,7 @@ class DataVisualizer:
         figures = []
         numeric_cols = df.select_dtypes(include=[np.number]).columns[:max_cols]
 
+        # Идивидуальные гистограммы, чтобы не перегружать отчёт
         for col in numeric_cols:
             fig, ax = plt.subplots(figsize=(8, 4))
             sns.histplot(df[col], kde=True, ax=ax, color="skyblue", bins=30)
