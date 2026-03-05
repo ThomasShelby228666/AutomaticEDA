@@ -61,53 +61,6 @@ class EDAApp:
             fig_corr,  # Корреляция
             dist_paths  # Распределения
         )
-        # Сохранение графиков во временные файлы для скачивания
-        # path_corr = None
-        # path_missing = None
-        # dist_paths = []
-        # with tempfile.TemporaryDirectory() as tmpdir:
-        #     p_corr = os.path.join(tmpdir, "correlation.png")
-        #     fig_corr.savefig(p_corr, bbox_inches="tight")
-        #     path_corr = p_corr
-        #
-        #     p_miss = os.path.join(tmpdir, "missing.png")
-        #     fig_missing.savefig(p_miss, bbox_inches="tight")
-        #     path_missing = p_miss
-        #
-        #     for i, fig in enumerate(dist_figs):
-        #         p_dist = os.path.join(tmpdir, f"dist_{i}.png")
-        #         fig.savefig(p_dist, bbox_inches="tight")
-        #         dist_paths.append(p_dist)
-        #
-        #     # Создадим постоянную временную папку для хранения графиков.
-        #     output_dir = tempfile.mkdtemp()
-        #     final_corr = None
-        #     final_missing = None
-        #     final_dist_paths = []
-        #
-        #     if path_corr:
-        #         new_name = os.path.join(output_dir, "correlation.png")
-        #         os.rename(path_corr, new_name)
-        #         final_corr = new_name
-        #
-        #     if path_missing:
-        #         new_name = os.path.join(output_dir, "missing.png")
-        #         os.rename(path_missing, new_name)
-        #         final_missing = new_name
-        #
-        #     for p in dist_paths:
-        #         new_name = os.path.join(output_dir, os.path.basename(p))
-        #         os.rename(p, new_name)
-        #         final_dist_paths.append(new_name)
-        #
-        # return (
-        #     df.head(10), # Превью
-        #     info_df, # Инфо
-        #     stats_df, #  Статистика
-        #     fig_missing, # Пропуски
-        #     fig_corr, # Корреляция
-        #     final_dist_paths # Распределения
-        # )
 
 def launch_interface():
     """
