@@ -57,7 +57,6 @@ auto_eda_project/
 ├── README.md               # Документация
 │
 └── src/                    # Исходный код
-    ├── __init__.py         # Маркер пакета Python
     ├── analyzer.py         # Класс для анализа данных
     └── visualizer.py       # Класс для визуализации
 ```
